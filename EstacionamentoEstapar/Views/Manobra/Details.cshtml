@@ -1,0 +1,42 @@
+﻿@model EstacionamentoEstapar.Models.Manobra
+
+@{
+    ViewBag.Title = "Consulta de Manobra";
+}
+
+&nbsp;
+<h2>@ViewBag.Title</h2>
+
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.DscPlaca)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DscPlaca)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Manobrista.Nome)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Manobrista.Nome)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Modelo.DscModelo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Modelo.DscModelo)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Editar", "Edit", new { id = Model.IdManobra }) |
+    @Html.ActionLink("Voltar para a lista", "Index")
+</p>

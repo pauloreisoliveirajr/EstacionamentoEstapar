@@ -1,0 +1,259 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="EstaparModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Manobra">
+          <Key>
+            <PropertyRef Name="IdManobra" />
+          </Key>
+          <Property Name="IdManobra" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdModelo" Type="int" Nullable="false" />
+          <Property Name="DscPlaca" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="IdManobrista" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Manobrista">
+          <Key>
+            <PropertyRef Name="IdManobrista" />
+          </Key>
+          <Property Name="IdManobrista" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nome" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="CPF" Type="varchar" MaxLength="14" Nullable="false" />
+          <Property Name="DtNascimento" Type="date" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Marca">
+          <Key>
+            <PropertyRef Name="IdMarca" />
+          </Key>
+          <Property Name="IdMarca" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DscMarca" Type="varchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Modelo">
+          <Key>
+            <PropertyRef Name="IdModelo" />
+          </Key>
+          <Property Name="IdModelo" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdMarca" Type="int" Nullable="false" />
+          <Property Name="DscModelo" Type="varchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Manobra_Manobrista">
+          <End Role="Manobrista" Type="Self.Manobrista" Multiplicity="1" />
+          <End Role="Manobra" Type="Self.Manobra" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Manobrista">
+              <PropertyRef Name="IdManobrista" />
+            </Principal>
+            <Dependent Role="Manobra">
+              <PropertyRef Name="IdManobrista" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Manobra_Modelo">
+          <End Role="Modelo" Type="Self.Modelo" Multiplicity="1" />
+          <End Role="Manobra" Type="Self.Manobra" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Modelo">
+              <PropertyRef Name="IdModelo" />
+            </Principal>
+            <Dependent Role="Manobra">
+              <PropertyRef Name="IdModelo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Modelo_Marca">
+          <End Role="Marca" Type="Self.Marca" Multiplicity="1" />
+          <End Role="Modelo" Type="Self.Modelo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Marca">
+              <PropertyRef Name="IdMarca" />
+            </Principal>
+            <Dependent Role="Modelo">
+              <PropertyRef Name="IdMarca" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="EstaparModelStoreContainer">
+          <EntitySet Name="Manobra" EntityType="Self.Manobra" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Manobrista" EntityType="Self.Manobrista" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Marca" EntityType="Self.Marca" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Modelo" EntityType="Self.Modelo" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Manobra_Manobrista" Association="Self.FK_Manobra_Manobrista">
+            <End Role="Manobrista" EntitySet="Manobrista" />
+            <End Role="Manobra" EntitySet="Manobra" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Manobra_Modelo" Association="Self.FK_Manobra_Modelo">
+            <End Role="Modelo" EntitySet="Modelo" />
+            <End Role="Manobra" EntitySet="Manobra" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Modelo_Marca" Association="Self.FK_Modelo_Marca">
+            <End Role="Marca" EntitySet="Marca" />
+            <End Role="Modelo" EntitySet="Modelo" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="EstaparModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Manobra">
+          <Key>
+            <PropertyRef Name="IdManobra" />
+          </Key>
+          <Property Name="IdManobra" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdModelo" Type="Int32" Nullable="false" />
+          <Property Name="DscPlaca" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="IdManobrista" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Manobrista" Relationship="Self.FK_Manobra_Manobrista" FromRole="Manobra" ToRole="Manobrista" />
+          <NavigationProperty Name="Modelo" Relationship="Self.FK_Manobra_Modelo" FromRole="Manobra" ToRole="Modelo" />
+        </EntityType>
+        <EntityType Name="Manobrista">
+          <Key>
+            <PropertyRef Name="IdManobrista" />
+          </Key>
+          <Property Name="IdManobrista" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nome" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CPF" Type="String" MaxLength="14" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="DtNascimento" Type="DateTime" Nullable="false" Precision="0" />
+          <NavigationProperty Name="Manobras" Relationship="Self.FK_Manobra_Manobrista" FromRole="Manobrista" ToRole="Manobra" />
+        </EntityType>
+        <EntityType Name="Marca">
+          <Key>
+            <PropertyRef Name="IdMarca" />
+          </Key>
+          <Property Name="IdMarca" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DscMarca" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Modeloes" Relationship="Self.FK_Modelo_Marca" FromRole="Marca" ToRole="Modelo" />
+        </EntityType>
+        <EntityType Name="Modelo">
+          <Key>
+            <PropertyRef Name="IdModelo" />
+          </Key>
+          <Property Name="IdModelo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdMarca" Type="Int32" Nullable="false" />
+          <Property Name="DscModelo" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Manobras" Relationship="Self.FK_Manobra_Modelo" FromRole="Modelo" ToRole="Manobra" />
+          <NavigationProperty Name="Marca" Relationship="Self.FK_Modelo_Marca" FromRole="Modelo" ToRole="Marca" />
+        </EntityType>
+        <Association Name="FK_Manobra_Manobrista">
+          <End Role="Manobrista" Type="Self.Manobrista" Multiplicity="1" />
+          <End Role="Manobra" Type="Self.Manobra" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Manobrista">
+              <PropertyRef Name="IdManobrista" />
+            </Principal>
+            <Dependent Role="Manobra">
+              <PropertyRef Name="IdManobrista" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Manobra_Modelo">
+          <End Role="Modelo" Type="Self.Modelo" Multiplicity="1" />
+          <End Role="Manobra" Type="Self.Manobra" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Modelo">
+              <PropertyRef Name="IdModelo" />
+            </Principal>
+            <Dependent Role="Manobra">
+              <PropertyRef Name="IdModelo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Modelo_Marca">
+          <End Role="Marca" Type="Self.Marca" Multiplicity="1" />
+          <End Role="Modelo" Type="Self.Modelo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Marca">
+              <PropertyRef Name="IdMarca" />
+            </Principal>
+            <Dependent Role="Modelo">
+              <PropertyRef Name="IdMarca" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="EstaparEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Manobras" EntityType="Self.Manobra" />
+          <EntitySet Name="Manobristas" EntityType="Self.Manobrista" />
+          <EntitySet Name="Marcas" EntityType="Self.Marca" />
+          <EntitySet Name="Modeloes" EntityType="Self.Modelo" />
+          <AssociationSet Name="FK_Manobra_Manobrista" Association="Self.FK_Manobra_Manobrista">
+            <End Role="Manobrista" EntitySet="Manobristas" />
+            <End Role="Manobra" EntitySet="Manobras" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Manobra_Modelo" Association="Self.FK_Manobra_Modelo">
+            <End Role="Modelo" EntitySet="Modeloes" />
+            <End Role="Manobra" EntitySet="Manobras" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Modelo_Marca" Association="Self.FK_Modelo_Marca">
+            <End Role="Marca" EntitySet="Marcas" />
+            <End Role="Modelo" EntitySet="Modeloes" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="EstaparModelStoreContainer" CdmEntityContainer="EstaparEntities">
+          <EntitySetMapping Name="Manobras">
+            <EntityTypeMapping TypeName="EstaparModel.Manobra">
+              <MappingFragment StoreEntitySet="Manobra">
+                <ScalarProperty Name="IdManobra" ColumnName="IdManobra" />
+                <ScalarProperty Name="IdModelo" ColumnName="IdModelo" />
+                <ScalarProperty Name="DscPlaca" ColumnName="DscPlaca" />
+                <ScalarProperty Name="IdManobrista" ColumnName="IdManobrista" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Manobristas">
+            <EntityTypeMapping TypeName="EstaparModel.Manobrista">
+              <MappingFragment StoreEntitySet="Manobrista">
+                <ScalarProperty Name="IdManobrista" ColumnName="IdManobrista" />
+                <ScalarProperty Name="Nome" ColumnName="Nome" />
+                <ScalarProperty Name="CPF" ColumnName="CPF" />
+                <ScalarProperty Name="DtNascimento" ColumnName="DtNascimento" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Marcas">
+            <EntityTypeMapping TypeName="EstaparModel.Marca">
+              <MappingFragment StoreEntitySet="Marca">
+                <ScalarProperty Name="IdMarca" ColumnName="IdMarca" />
+                <ScalarProperty Name="DscMarca" ColumnName="DscMarca" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Modeloes">
+            <EntityTypeMapping TypeName="EstaparModel.Modelo">
+              <MappingFragment StoreEntitySet="Modelo">
+                <ScalarProperty Name="IdModelo" ColumnName="IdModelo" />
+                <ScalarProperty Name="IdMarca" ColumnName="IdMarca" />
+                <ScalarProperty Name="DscModelo" ColumnName="DscModelo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

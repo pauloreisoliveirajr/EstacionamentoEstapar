@@ -1,0 +1,48 @@
+﻿@model IEnumerable<EstacionamentoEstapar.Models.Manobrista>
+
+@{
+    ViewBag.Title = "Manobristas cadastrados";
+}
+
+&nbsp;
+<h2>@ViewBag.Title</h2>
+
+&nbsp;
+<p>
+    @Html.ActionLink("Incluir Manobrista", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Nome)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CPF)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DtNascimento)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Nome)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CPF)
+            </td>
+            <td>
+                @Convert.ToDateTime(item.DtNascimento).ToString("dd/MM/yyyy")
+            </td>
+            <td>
+                @Html.ActionLink("Editar", "Edit", new { id = item.IdManobrista }) |
+                @Html.ActionLink("Consultar", "Details", new { id = item.IdManobrista }) |
+                @Html.ActionLink("Excluir", "Delete", new { id = item.IdManobrista })
+            </td>
+        </tr>
+    }
+
+</table>

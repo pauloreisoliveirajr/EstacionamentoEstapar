@@ -1,0 +1,49 @@
+﻿@model IEnumerable<EstacionamentoEstapar.Models.Manobra>
+
+@{
+    ViewBag.Title = "Manobras cadastradas";
+}
+
+&nbsp;
+<h2>@ViewBag.Title</h2>
+
+&nbsp;
+
+<p>
+    @Html.ActionLink("Incluir Manobra", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.DscPlaca)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Manobrista.Nome)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Modelo.DscModelo)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.DscPlaca)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Manobrista.Nome)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Modelo.DscModelo)
+            </td>
+            <td>
+                @Html.ActionLink("Editar", "Edit", new { id = item.IdManobra }) |
+                @Html.ActionLink("Consultar", "Details", new { id = item.IdManobra }) |
+                @Html.ActionLink("Excluir", "Delete", new { id = item.IdManobra })
+            </td>
+        </tr>
+    }
+
+</table>

@@ -1,0 +1,34 @@
+﻿@model EstacionamentoEstapar.Models.Modelo
+
+@{
+    ViewBag.Title = "Consulta de Modelo";
+}
+
+&nbsp;
+<h2>@ViewBag.Title</h2>
+
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.DscModelo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DscModelo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Marca.DscMarca)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Marca.DscMarca)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Editar", "Edit", new { id = Model.IdModelo }) |
+    @Html.ActionLink("Voltar para a lista", "Index")
+</p>

@@ -1,0 +1,42 @@
+﻿@model EstacionamentoEstapar.Models.Manobrista
+
+@{
+    ViewBag.Title = "Consulta de Manobrista";
+}
+
+&nbsp;
+<h2>@ViewBag.Title</h2>
+
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Nome)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Nome)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CPF)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CPF)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DtNascimento)
+        </dt>
+
+        <dd>
+            @Convert.ToDateTime(Model.DtNascimento).ToString("dd/MM/yyyy")
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Editar", "Edit", new { id = Model.IdManobrista }) |
+    @Html.ActionLink("Voltar para a lista", "Index")
+</p>

@@ -1,0 +1,36 @@
+﻿@model IEnumerable<EstacionamentoEstapar.Models.Marca>
+
+@{
+    ViewBag.Title = "Marcas cadastradas";
+}
+
+&nbsp;
+<h2>@ViewBag.Title</h2>
+
+&nbsp;
+<p>
+    @Html.ActionLink("Incluir Marca", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.DscMarca)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.DscMarca)
+            </td>
+            <td>
+                @Html.ActionLink("Editar", "Edit", new { id = item.IdMarca }) |
+                @Html.ActionLink("Consultar", "Details", new { id = item.IdMarca }) |
+                @Html.ActionLink("Excluir", "Delete", new { id = item.IdMarca })
+            </td>
+        </tr>
+    }
+
+</table>
